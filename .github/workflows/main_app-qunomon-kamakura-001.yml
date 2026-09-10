@@ -26,13 +26,13 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-        working-directory: ./qunomon
+        working-directory: ./qunomon/src/backend
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: ./qunomon
+          path: ./qunomon/src/backend
 
   deploy:
     runs-on: ubuntu-latest
