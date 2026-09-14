@@ -27,7 +27,7 @@ marshmallow==3.3.0
 marshmallow-sqlalchemy==0.21.0
 matplotlib==3.4.3
 numpy==1.22.4
-pandas==1.2.0
+pandas==1.5.3
 passlib==1.7.2
 pdfkit==0.6.1
 psycopg2==2.9.1
