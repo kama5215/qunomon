@@ -26,7 +26,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip setuptools wheel
-          pip install -r requirements.txt --target=".python_packages/lib/site-packages"
+          pip install -r requirements.txt --target="python_packages/lib/site-packages"
         working-directory: ./qunomon/src/backend
 
       - name: Upload artifact for deployment job
