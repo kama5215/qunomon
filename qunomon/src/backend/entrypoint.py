@@ -1,5 +1,7 @@
 # Copyright © 2019 National Institute of Advanced Industrial Science and Technology （AIST）. All rights reserved.
 import os
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), '.python_packages/lib/site-packages'))
 
 from qai_testbed_backend.across.create_app import create_app, init_guideline
 from distutils.util import strtobool
