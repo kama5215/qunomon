@@ -12,7 +12,7 @@ setup(
         "reportgenerator"
     ],
     install_requires=[
-        "pandas==1.2.0",
+        "pandas>=1.2.0",
         "pdfkit==0.6.1"
     ]
 )
