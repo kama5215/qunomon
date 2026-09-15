@@ -47,3 +47,4 @@ Werkzeug==3.0.6
 WTForms==2.3.3
 ./report
 ./libs/qlib-0.1.0-py3-none-any.whl
+setuptools
