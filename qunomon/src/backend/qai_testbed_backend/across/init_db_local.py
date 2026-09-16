@@ -1043,8 +1043,12 @@ def _init_db_demo_2():
 
     file_check_result_list = []
     for inv_path in inv_path_list:
+    try:
         file_check_result_list.append(FileChecker().execute(inv_path, file_system_id))
+    except Exception:
+        file_check_result_list.append({'hash_sha256': ''})
 
+    
     invs = [InventoryMapper(name='TestDataset_0818',
                             type_id=data_types[0].id,
                             file_system_id=file_system_id,
