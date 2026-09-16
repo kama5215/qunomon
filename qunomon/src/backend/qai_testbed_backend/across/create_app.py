@@ -88,33 +88,34 @@ def init_guideline(app):
     with app.app_context():
 
         # ガイドラインスキーマファイルパスを取得
-        guideline_schema_files_path = SettingMapper.query.get('guideline_schema_files_path').value
+        setting = SettingMapper.query.get('guideline_schema_files_path')
+        guideline_schema_files_path = setting.value if setting else ''
 
         # ガイドラインスキーマファイル毎に登録
-        for guideline_schema_file_name in os.listdir(guideline_schema_files_path):
+        if guideline_schema_files_path and os.path.exists(guideline_schema_files_path):
+            for guideline_schema_file_name in os.listdir(guideline_schema_files_path):
+                # ガイドラインスキーマファイル
+                guideline_schema_file = guideline_schema_files_path + '/' + guideline_schema_file_name
 
-            # ガイドラインスキーマファイル
-            guideline_schema_file = guideline_schema_files_path + '/' + guideline_schema_file_name
-        
-            with open(str(guideline_schema_file), encoding='utf-8') as gs_file:
-                # ガイドラインスキーマをJSONファイルに変更
-                guideline_schema_json = json.load(gs_file)
-            
-            # ガイドライン名称を取得
-            for gsj in guideline_schema_json["guideline"]["meta_info"]:
-                if gsj["property"] == 'title':
-                    guideline_name = gsj["content"]
+                with open(str(guideline_schema_file), encoding='utf-8') as gs_file:
+                    # ガイドラインスキーマをJSONファイルに変更
+                    guideline_schema_json = json.load(gs_file)
 
-            if guideline_name is not None and len(guideline_name) != 0 and ' ' not in guideline_name:
-                if GuidelineMapper.query.filter(GuidelineMapper.name == guideline_name).\
-                    filter(GuidelineMapper.delete_flag.is_(False)).first() is None:
-        
-                    # ガイドラインスキーマファイルファイルから登録
-                    GuidelineSchemaFileService().post(guideline_schema_json)
+                # ガイドライン名称を取得
+                for gsj in guideline_schema_json["guideline"]["meta_info"]:
+                    if gsj["property"] == 'title':
+                        guideline_name = gsj["content"]
 
-                    # M_ReportTemplateにレコード追加
-                    report_template = ReportTemplateMapper(name='AIQM Report Template',
-                                                           guideline_id=1)
+                if guideline_name is not None and len(guideline_name) != 0 and ' ' not in guideline_name:
+                    if GuidelineMapper.query.filter(GuidelineMapper.name == guideline_name).\
+                        filter(GuidelineMapper.delete_flag.is_(False)).first() is None:
 
-                    extensions.sql_db.session.add(report_template)
-                    extensions.sql_db.session.commit()
+                        # ガイドラインスキーマファイルファイルから登録
+                        GuidelineSchemaFileService().post(guideline_schema_json)
+
+                        # M_ReportTemplateにレコード追加
+                        report_template = ReportTemplateMapper(name='AIQM Report Template',
+                                                                guideline_id=1)
+
+                        extensions.sql_db.session.add(report_template)
+                        extensions.sql_db.session.commit()
