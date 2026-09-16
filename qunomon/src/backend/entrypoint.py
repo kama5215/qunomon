@@ -27,4 +27,4 @@ init_guideline(app)
 
 if __name__ == '__main__':
     port = int(os.getenv('WEBSITES_PORT') or os.getenv('PORT') or os.getenv('FLASK_PORT') or 8000)
-    app.run(port=port, host='0.0.0.0', threaded=False)
+    app.run(port=port, host='0.0.0.0', threaded=True)
