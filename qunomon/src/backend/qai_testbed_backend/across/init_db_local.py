@@ -55,6 +55,7 @@ from .file_checker import FileChecker
 
 def init_db(app, config_name):
     with app.app_context():
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://qunomon_admin:9un0m0n1234!@qunomon-db-001.postgres.database.azure.com:5432/qunomon_db?sslmode=require'
         extensions.sql_db.drop_all()
         extensions.sql_db.create_all()
 
