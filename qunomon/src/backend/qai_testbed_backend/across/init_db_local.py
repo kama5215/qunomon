@@ -1038,7 +1038,7 @@ def _init_db_demo_2():
         else:
             split_char = '/'
 
-        files_dir = os.getenv('QAI_HOST_DIR') + split_char + 'tests' + split_char + 'files'
+        files_dir = (os.getenv('QAI_HOST_DIR') or '/home/site/wwwroot') + split_char + 'tests' + split_char + 'files'
         inv_path_list = [files_dir + split_char + f for f in inv_file_list]
 
     file_check_result_list = []
