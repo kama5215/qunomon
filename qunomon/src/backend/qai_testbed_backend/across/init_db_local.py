@@ -1030,7 +1030,8 @@ def _init_db_demo_2():
 
         file_system_id = file_systems[1].id
     else:
-        file_system_id = [f for f in file_systems if f.name == os.getenv('QAI_HOST_FILE_SYSTEM')][0].id
+        matched_fs = [f for f in file_systems if f.name == os.getenv('QAI_HOST_FILE_SYSTEM')]
+        file_system_id = matched_fs[0].id if matched_fs else file_systems[0].id
 
         if os.getenv('QAI_HOST_FILE_SYSTEM') == 'WINDOWS_FILE':
             split_char = '\\'
