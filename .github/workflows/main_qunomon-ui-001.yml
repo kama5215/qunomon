@@ -28,13 +28,13 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-        working-directory: src/frontend/web_ui
+        working-directory: qunomon/src/frontend/web_ui
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: src/frontend/web_ui .
+          path: qunomon/src/frontend/web_ui
 
   deploy:
     runs-on: ubuntu-latest
